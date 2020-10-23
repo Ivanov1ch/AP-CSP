@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     }
     salt[num_salt_characters] = '\0';
 
-    // Brute force all ciphertexts up to 5 characters in length
+    // Brute force all ciphertexts up to PASSWORD_LENGTH characters in length
     char ciphertext[PASSWORD_LENGTH + 1];
 
     for (int ciphertext_length = 1; ciphertext_length <= PASSWORD_LENGTH; ciphertext_length++)
@@ -65,6 +65,7 @@ int main(int argc, char *argv[])
         if (result == 1)
         {
             printf("%s\n", ciphertext);
+            return 0;
         }
 
         int is_done = increment(ciphertext_length, ciphertext); // Is_done will equal -1 if no more incrementing
