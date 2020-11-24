@@ -48,6 +48,7 @@ char *encode(char *original_text)
         {
             char current_char = *(current_char_pointer++);
             square_form[row][col] = current_char;
+
             if (current_char == '\0')
             {
                 break;
@@ -56,14 +57,14 @@ char *encode(char *original_text)
     }
 
     // Alter plaintext based off of the table
-    current_char_pointer = plaintext;
     int max_row_to_visit = num_rows;
+    int current_char_index = 0;
     for (int col = 0; col < num_cols; col++)
     {
         for (int row = 0; row < max_row_to_visit; row++)
         {
             char current_char = square_form[row][col];
-            *current_char_pointer++ = current_char;
+
             if(current_char == '\0')
             {
                 // There are elements to the right of this element in the current row.
@@ -71,9 +72,12 @@ char *encode(char *original_text)
                 max_row_to_visit--;
                 break;
             }
+
+            plaintext[current_char_index++] = current_char;
         }
     }
 
+    plaintext[current_char_index] = '\0';
     return plaintext;
 }
 
